@@ -27,13 +27,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - uses: pnpm/action-setup@v2
+        name: Setup pnpm
+        with:
+          version: latest
+
       - uses: actions/setup-node@master
         with:
           node-version: latest
           cache: 'pnpm'
-
-      - name: Install global dependencies
-        run: npm i -g npm pnpm
 
       - name: Install local dependencies
         run: pnpm install --frozen-lockfile
