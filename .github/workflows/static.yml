@@ -38,10 +38,16 @@ jobs:
         with:
           node-version: latest
 
+      - name: Install dependencies
+        run: npm i -g npm pnpm && pnpm i
+
+      - name: Build
+        run: pnpm build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@master
         with:
-          path: './docs'
+          path: './build'
 
       - name: Deploy to GitHub Pages
         id: deployment
