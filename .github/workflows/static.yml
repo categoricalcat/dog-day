@@ -29,20 +29,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@latest
+        uses: actions/checkout@master
 
       - name: Setup Pages
-        uses: actions/configure-pages@latest
+        uses: actions/configure-pages@master
 
-      - uses: actions/setup-node@latest
+      - uses: actions/setup-node@master
         with:
           node-version: latest
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@latest
+        uses: actions/upload-pages-artifact@master
         with:
           path: './docs'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@latest
+        uses: actions/deploy-pages@master
