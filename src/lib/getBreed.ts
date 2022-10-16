@@ -9,6 +9,12 @@ const getBreed = (id: number): Promise<Breed> =>
 				'X-Requested-With': 'XMLHttpRequest'
 			}
 		}
-	).then((r) => r.json());
+	)
+		.then((r) => r.json())
+		.catch((e) => {
+			console.error(e);
+
+			return {};
+		});
 
 export default getBreed;
