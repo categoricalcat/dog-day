@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@master
         with:
           name: build
           path: ./build
@@ -59,10 +59,13 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@master
 
+      - uses: actions/download-artifact@master
+        with:
+          name: build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@master
         with:
-          artifact: build
           path: './build'
 
       - name: Deploy to GitHub Pages
