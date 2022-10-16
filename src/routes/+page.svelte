@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '$lib/reset.css';
-	import '$lib/global.scss';
 	import type { FormatedBreed } from '$lib/getBreed';
 
 	export let data: FormatedBreed;
