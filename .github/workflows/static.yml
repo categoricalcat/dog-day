@@ -31,11 +31,19 @@ jobs:
         with:
           node-version: latest
 
-      - name: Install dependencies
-        run: npm i -g npm pnpm && pnpm i
+      - name: Install global dependencies
+        run: npm i -g npm pnpm
+
+      - name: Install local dependencies
+        run: pnpm i
 
       - name: Build
         run: pnpm build
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./build
 
   deploy:
     needs: build
@@ -54,6 +62,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@master
         with:
+          artifact: build
           path: './build'
 
       - name: Deploy to GitHub Pages
