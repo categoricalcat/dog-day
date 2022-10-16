@@ -15,9 +15,8 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "main"
   cancel-in-progress: true
 
 jobs:
@@ -64,12 +63,12 @@ jobs:
         name: Download build artifact
         with:
           name: build
-          path: './dog-day'
+          path: './build'
 
       - name: Upload build to Pages
         uses: actions/upload-pages-artifact@master
         with:
-          path: './dog-day'
+          path: './build'
 
       - name: Deploy to GitHub Pages
         id: deployment
