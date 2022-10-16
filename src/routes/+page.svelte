@@ -1,26 +1,16 @@
 <script lang="ts">
 	import '$lib/reset.css';
 	import '$lib/global.scss';
-	import type { Breed } from '$types/breeds';
+	import type { FormatedBreed } from '$lib/getBreed';
 
-	export let data: Breed;
-	console.log(data);
+	export let data: FormatedBreed;
 
 	const {
-		content: { rendered: content },
-		title: { rendered: title }
+		description,
+		image: { alt, height, src, width },
+		features,
+		title
 	} = data;
-
-	const {
-		alt_text,
-		source_url,
-		media_details: { width = 0, height = 0 } = {}
-	} = data._embedded['wp:featuredmedia']?.[0] || {};
-
-	const terms =
-		data._embedded['wp:term']
-			?.flat()
-			?.map(({ name, taxonomy }) => ({ name, taxonomy })) || [];
 </script>
 
 <main>
@@ -28,13 +18,13 @@
 		{@html title}
 	</h1>
 
-	{@html content}
+	{@html description}
 
-	{#each terms as { name, taxonomy }}
-		<p>{taxonomy} - {name}</p>
+	{#each features as { name, value }}
+		<p>{value} - {name}</p>
 	{/each}
 
-	<img {width} src={source_url} alt={alt_text} {height} />
+	<img {width} {src} {alt} {height} />
 </main>
 
 <style>
