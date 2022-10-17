@@ -1,21 +1,43 @@
 <script lang="ts">
 	import '$css/reset.css';
 	import '$css/app.scss';
+	import type { PageData } from './$types';
+	import breeds from '$breeds.json';
 
-	import type { FormatedBreed } from '$lib/getBreed';
 	import startCase from 'lodash/startCase';
+	import getBreed, { formatBreed } from '$lib/getBreed';
+	import random from '$lib/random';
 
-	export let data: FormatedBreed;
+	export let data: PageData;
 
 	const {
 		description,
 		image: { alt, height, src, width },
 		features,
 		title
-	} = data;
+	} = data.breed;
 </script>
 
 <main class="container mx-auto p-6">
+	<button
+		on:click={() => {
+			const id = breeds[(random() * breeds.length) | 0];
+			if (!id) throw new Error('No breed found');
+
+			getBreed(id)
+				.then(formatBreed)
+				.then((breed) => {
+					data.breed = breed;
+				})
+				.catch((err) => {
+					console.error(err);
+				});
+		}}
+		class="mx-auto px-6 py-2 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+	>
+		NEW
+	</button>
+
 	<h1 class="text-center text-4xl mb-6 font-bold uppercase">dog of the day</h1>
 
 	<article

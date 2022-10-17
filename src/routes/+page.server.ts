@@ -9,5 +9,12 @@ export const load: PageLoad = async () => {
 	const id = breeds[(random() * breeds.length) | 0];
 	if (!id) throw new Error('No breed found');
 
-	return getBreed(id).then(formatBreed);
+	console.log(`
+    id: ${id}`);
+
+	return {
+		breed: getBreed(id).then(formatBreed),
+		id,
+		getMore: breeds.length
+	};
 };

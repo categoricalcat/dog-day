@@ -6,13 +6,7 @@ const getBreed = (id: number): Promise<Breed> =>
 		headers: {
 			'X-Requested-With': 'XMLHttpRequest'
 		}
-	})
-		.then((r) => r.json())
-		.catch((e) => {
-			console.error(e);
-
-			return {};
-		});
+	}).then((r) => r.json());
 
 export const formatBreed = (data: Breed) => {
 	const {
