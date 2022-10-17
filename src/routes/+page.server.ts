@@ -1,7 +1,7 @@
 import getBreed, { formatBreed } from '$lib/getBreed';
 import random from '$lib/random';
 import type { PageLoad } from '$types/page';
-import breeds from '$breeds.json';
+import breeds from '../../static/breeds.json';
 
 export const prerender = true;
 

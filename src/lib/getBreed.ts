@@ -47,7 +47,7 @@ export const formatBreed = (data: Breed) => {
 export type FormatedBreed = ReturnType<typeof formatBreed>;
 
 export const getDog = async () => {
-	const breeds = (await import('$breeds.json')).default;
+	const breeds = await fetch('/breeds.json').then((r) => r.json());
 
 	const id = breeds[(random() * breeds.length) | 0];
 	if (!id) throw new Error('No breed found');

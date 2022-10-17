@@ -1,10 +1,10 @@
 <script lang="ts">
-	import '$css/reset.css';
 	import '$css/app.scss';
+	import '$css/reset.css';
 	import type { PageData } from './$types';
 
-	import startCase from 'lodash/startCase';
 	import { getDog } from '$lib/getBreed';
+	import startCase from 'lodash/startCase';
 
 	export let data: PageData;
 
