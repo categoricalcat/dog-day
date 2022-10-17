@@ -18,7 +18,20 @@
 	} = data.breed);
 </script>
 
-<main class="container mx-auto p-6">
+<svelte:head>
+	<title>Everyday is Dog Day - {title}</title>
+	<meta name="description" content={alt} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={alt} />
+	<meta name="twitter:image" content={src} />
+	<meta property="og:url" content="https://walze.github.io/dog-day/" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={alt} />
+	<meta property="og:image" content={src} />
+</svelte:head>
+
+<main class="container mx-auto p-6 pt-4">
 	<h1 class="text-center text-2xl mb-4 font-bold uppercase">
 		Everyday is Dog Day
 	</h1>
