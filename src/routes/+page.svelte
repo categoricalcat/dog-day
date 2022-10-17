@@ -1,6 +1,7 @@
 <script lang="ts">
-	import '$css/app.scss';
 	import '$css/reset.css';
+	import '$css/app.scss';
+
 	import type { PageData } from './$types';
 
 	import { getDog } from '$lib/getBreed';
