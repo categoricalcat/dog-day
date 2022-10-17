@@ -1,4 +1,7 @@
 <script lang="ts">
+	import '$css/reset.css';
+	import '$css/app.scss';
+
 	import type { FormatedBreed } from '$lib/getBreed';
 	import startCase from 'lodash/startCase';
 
