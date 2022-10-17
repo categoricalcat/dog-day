@@ -16,18 +16,24 @@
 		features,
 		title
 	} = data.breed);
+
+	const stripHtml = (html: string): string => {
+		let tmp = document.createElement('DIV');
+		tmp.innerHTML = html;
+		return tmp.textContent || tmp.innerText || '';
+	};
 </script>
 
 <svelte:head>
 	<title>Everyday is Dog Day - {title}</title>
 	<meta name="description" content={alt} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={alt} />
+	<meta name="twitter:title" content={`Everyday is Dog Day - ${title}`} />
+	<meta name="twitter:description" content={stripHtml(description)} />
 	<meta name="twitter:image" content={src} />
 	<meta property="og:url" content="https://walze.github.io/dog-day/" />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={alt} />
+	<meta property="og:title" content={`Everyday is Dog Day - ${title}`} />
+	<meta property="og:description" content={stripHtml(description)} />
 	<meta property="og:image" content={src} />
 	<meta property="og:type" content="website" />
 </svelte:head>
