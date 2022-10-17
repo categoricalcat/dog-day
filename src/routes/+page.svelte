@@ -29,6 +29,7 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={alt} />
 	<meta property="og:image" content={src} />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <main class="container mx-auto p-6 pt-4">
