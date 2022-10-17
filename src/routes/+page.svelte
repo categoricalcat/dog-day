@@ -4,12 +4,9 @@
 
 	import type { PageData } from './$types';
 
-	import { getDog } from '$lib/getBreed';
 	import startCase from 'lodash/startCase';
 
 	export let data: PageData;
-
-	let timedOut = false;
 
 	$: ({
 		description,
@@ -82,24 +79,8 @@
 		</div>
 	</article>
 
-	<button
-		disabled={timedOut}
-		on:click={async () => {
-			if (timedOut) return;
-			timedOut = true;
-
-			getDog()
-				.then((breed) => {
-					data.breed = breed;
-				})
-				.finally(() => {
-					setTimeout(() => {
-						timedOut = false;
-					}, 5000);
-				});
-		}}
-		class="block mt-4 font-semibold text-xl tracking-wide px-8 py-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full mx-auto max-w-lg "
-	>
-		{timedOut ? 'too many dogs, must wait now...' : 'GET A NEW DOG'}
-	</button>
+	<p class="w-full mx-auto max-w-lg my-6 px-6">
+		Everyday is dog day so I made this App that shows information about a
+		different dog breed everyday.
+	</p>
 </main>

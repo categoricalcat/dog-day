@@ -4,6 +4,7 @@ import type { PageLoad } from '$types/page';
 import breeds from '../../static/breeds.json';
 
 export const prerender = true;
+export const csr = false;
 
 export const load: PageLoad = async () => {
 	const id = breeds[(random() * breeds.length) | 0];
