@@ -44,7 +44,7 @@
 		class="w-full mx-auto max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
 	>
 		<img
-			class="object-cover object-center w-full h-56"
+			class="object-cover object-top w-full h-56"
 			{width}
 			{src}
 			{alt}
