@@ -1,8 +1,14 @@
 import type { Breed } from '$types/breeds';
 import fetch from 'isomorphic-unfetch';
+import random from './random';
+
+const URI =
+	typeof window === 'undefined'
+		? 'https://www.akc.org'
+		: 'https://cors-anywhere.herokuapp.com/https://www.akc.org';
 
 const getBreed = (id: number): Promise<Breed> =>
-	fetch(`https://www.akc.org/wp-json/wp/v2/breed/${id}?_embed`, {
+	fetch(`${URI}/wp-json/wp/v2/breed/${id}?_embed`, {
 		headers: {
 			'X-Requested-With': 'XMLHttpRequest'
 		}
@@ -39,5 +45,14 @@ export const formatBreed = (data: Breed) => {
 };
 
 export type FormatedBreed = ReturnType<typeof formatBreed>;
+
+export const getDog = async () => {
+	const breeds = (await import('$breeds.json')).default;
+
+	const id = breeds[(random() * breeds.length) | 0];
+	if (!id) throw new Error('No breed found');
+
+	return getBreed(id).then(formatBreed);
+};
 
 export default getBreed;

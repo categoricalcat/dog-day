@@ -2,46 +2,29 @@
 	import '$css/reset.css';
 	import '$css/app.scss';
 	import type { PageData } from './$types';
-	import breeds from '$breeds.json';
 
 	import startCase from 'lodash/startCase';
-	import getBreed, { formatBreed } from '$lib/getBreed';
-	import random from '$lib/random';
+	import { getDog } from '$lib/getBreed';
 
 	export let data: PageData;
 
-	const {
+	let timedOut = false;
+
+	$: ({
 		description,
 		image: { alt, height, src, width },
 		features,
 		title
-	} = data.breed;
+	} = data.breed);
 </script>
 
 <main class="container mx-auto p-6">
-	<button
-		on:click={() => {
-			const id = breeds[(random() * breeds.length) | 0];
-			if (!id) throw new Error('No breed found');
-
-			getBreed(id)
-				.then(formatBreed)
-				.then((breed) => {
-					data.breed = breed;
-				})
-				.catch((err) => {
-					console.error(err);
-				});
-		}}
-		class="mx-auto px-6 py-2 bg-white rounded-lg shadow-lg dark:bg-gray-800"
-	>
-		NEW
-	</button>
-
-	<h1 class="text-center text-4xl mb-6 font-bold uppercase">dog of the day</h1>
+	<h1 class="text-center text-2xl mb-4 font-bold uppercase">
+		Everyday is Dog Day
+	</h1>
 
 	<article
-		class="w-full mx-auto max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
+		class="w-full mx-auto max-w-lg overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800"
 	>
 		<img
 			class="object-cover object-top w-full h-56"
@@ -77,4 +60,25 @@
 			</ul>
 		</div>
 	</article>
+
+	<button
+		disabled={timedOut}
+		on:click={async () => {
+			if (timedOut) return;
+			timedOut = true;
+
+			getDog()
+				.then((breed) => {
+					data.breed = breed;
+				})
+				.finally(() => {
+					setTimeout(() => {
+						timedOut = false;
+					}, 5000);
+				});
+		}}
+		class="block mt-4 font-semibold text-xl tracking-wide px-8 py-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full mx-auto max-w-lg "
+	>
+		{timedOut ? 'too many dogs, must wait now...' : 'GET A NEW DOG'}
+	</button>
 </main>
