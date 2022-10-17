@@ -40,11 +40,21 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Cache install
+        id: cache-install
+        uses: actions/cache@master
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
       - name: Test
         run: pnpm test
 
       - name: Build
         run: pnpm build
+
 
       - uses: actions/upload-artifact@master
         name: Upload build artifact
