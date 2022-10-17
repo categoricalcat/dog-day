@@ -17,6 +17,9 @@ const config = {
 			postcss: true
 		})
 	],
+	compilerOptions: {
+		hydratable: true
+	},
 	kit: {
 		adapter: adapter({
 			precompress: true
