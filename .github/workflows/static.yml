@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - uses: pnpm/action-setup@main
+      - uses: pnpm/action-setup@master
         name: Setup PNPM
         with:
           version: latest
