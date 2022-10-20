@@ -58,11 +58,10 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - uses: actions/upload-artifact@main
-        name: Upload build artifact
+      - name: Upload build to Pages
+        uses: actions/upload-pages-artifact@main
         with:
-          name: github-pages
-          path: ./build
+          path: './build'
 
   deploy:
     needs: build
