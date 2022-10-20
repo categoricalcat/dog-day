@@ -57,11 +57,11 @@ jobs:
             node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - name: Test
-        run: pnpm test
-
-      - name: Build
-        run: pnpm build
+      - name: Test & Build
+        run: |
+          pnpm test &
+          pnpm build &
+          wait
 
       - name: Upload build to Pages
         uses: actions/upload-pages-artifact@main
