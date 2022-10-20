@@ -27,14 +27,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - uses: pnpm/action-setup@v2
         name: Setup PNPM
         with:
           version: latest
 
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@main
         name: Setup Node
         with:
           node-version: latest
@@ -45,7 +45,7 @@ jobs:
 
       - name: Cache install
         id: cache-install
-        uses: actions/cache@master
+        uses: actions/cache@main
         with:
           path: |
             ~/.pnpm-store
@@ -58,11 +58,10 @@ jobs:
       - name: Build
         run: pnpm build
 
-
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@main
         name: Upload build artifact
         with:
-          name: build
+          name: github-pages
           path: ./build
 
   deploy:
@@ -74,19 +73,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Pages
-        uses: actions/configure-pages@master
-
-      - uses: actions/download-artifact@master
-        name: Download build artifact
-        with:
-          name: build
-          path: './build'
-
-      - name: Upload build to Pages
-        uses: actions/upload-pages-artifact@master
-        with:
-          path: './build'
+        uses: actions/configure-pages@main
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@master
+        uses: actions/deploy-pages@main
