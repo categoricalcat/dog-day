@@ -11,7 +11,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"preview": "vite preview",
 		"sync": "svelte-kit sync",
-		"test": "pnpm format && pnpm lint && pnpm check"
+		"test": "pnpm format && pnpm lint & pnpm check & wait"
 	},
 	"dependencies": {
 		"axios": "^1.1.3",
